@@ -1,6 +1,6 @@
 {
   "name": "@pluralsight/rabbot",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Fork of arobson/rabbot until issue #183 is addressed... Abstractions to simplify working with the RabbitMQ",
   "main": "src/index.js",
   "engines": {
