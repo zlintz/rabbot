@@ -61,12 +61,18 @@
       "url": "http://github.com/LeankitAustin"
     }
   ],
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
   "license": "MIT",
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
-    "commitizen": "^4.0.3",
+    "commitizen": "4.0.3",
     "coveralls": "^2.13.1",
+    "cz-conventional-changelog": "3.0.2",
     "lodash": "4.17.x",
     "mocha": "^3.4.1",
     "mocha-lcov-reporter": "^1.3.0",
