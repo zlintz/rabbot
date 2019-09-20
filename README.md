@@ -40,7 +40,7 @@ This is a very opinionated abstraction over amqplib to help simplify the impleme
 
 ## Other Documents
 
- * [Contributor Guide](https://github.com/zlintz/foo-foo-mq/blob/master/HOW_TO_CONTRIBUTE.md) 
+ * [Contributor Guide](https://github.com/zlintz/foo-foo-mq/blob/master/HOW_TO_CONTRIBUTE.md)
  * [Code of Conduct](https://github.com/zlintz/foo-foo-mq/blob/master/CODE_OF_CONDUCT.md)
  * [Resources](https://github.com/zlintz/foo-foo-mq/blob/master/RESOURCES.md)
  * [Maintainers](https://github.com/zlintz/foo-foo-mq/blob/master/MAINTAINERS.md)
