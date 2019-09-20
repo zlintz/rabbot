@@ -34,7 +34,7 @@ Please open an issue or send an email to a maintainer before undertaking large s
 
 ### Commit Style
 
-`foo-foo-mq` uses [conventional commits](https://conventionalcommits.org/), this is so releases can be generated much more quickly (this includes automated generation of the CHANGELOG going forward).
+`foo-foo-mq` uses [conventional commits](https://conventionalcommits.org/) so that releases can be generated much more quickly (this includes automated generation of the CHANGELOG going forward).
 
 PRs with commits that do not follow this style will be asked to fix their commit log. PRs that do not conform will eventually be closed out.
 
