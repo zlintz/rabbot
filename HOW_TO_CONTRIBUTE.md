@@ -34,9 +34,13 @@ Please open an issue or send an email to a maintainer before undertaking large s
 
 ### Commit Style
 
-Rabbot now uses [conventional commits](https://conventionalcommits.org/) so that going forward from 2.0.0, releases can be generated much more quickly (this includes automated generation of the CHANGELOG going forward).
+`foo-foo-mq` uses [conventional commits](https://conventionalcommits.org/) so that releases can be generated much more quickly (this includes automated generation of the CHANGELOG going forward).
 
 PRs with commits that do not follow this style will be asked to fix their commit log. PRs that do not conform will eventually be closed out.
+
+To make things easier, this repo is  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+ 
+ Simply run `npm run commit` and it will prompt you through creating your commit message in the correct format.
 
 ### Running Tests & Coverage
 
