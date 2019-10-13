@@ -1,16 +1,16 @@
 # Publishing
 
-In confirm mode (the default for exchanges), the publish call returns a promise that is only resolved once the broker has confirmed the publish (see [Publisher Acknowledgments](https://www.rabbitmq.com/confirms.html) for more details). If a configured timeout is reached, or in the rare event that the broker rejects the message, the promise will be rejected. More commonly, the connection to the broker could be lost before the message is confirmed and you end up with a message in "limbo". rabbot keeps a list of unconfirmed messages that have been published _in memory only_. Once a connection is available and the topology is in place, rabbot will send messages in the order of the publish calls. In the event of a disconnection or unreachable broker, all publish promises that have not been resolved are rejected.
+In confirm mode (the default for exchanges), the publish call returns a promise that is only resolved once the broker has confirmed the publish (see [Publisher Acknowledgments](https://www.rabbitmq.com/confirms.html) for more details). If a configured timeout is reached, or in the rare event that the broker rejects the message, the promise will be rejected. More commonly, the connection to the broker could be lost before the message is confirmed and you end up with a message in "limbo". foo-foo-mq keeps a list of unconfirmed messages that have been published _in memory only_. Once a connection is available and the topology is in place, foo-foo-mq will send messages in the order of the publish calls. In the event of a disconnection or unreachable broker, all publish promises that have not been resolved are rejected.
 
-Publish timeouts can be set per message, per exchange or per connection. The most specific value overrides any set at a higher level. There are no default timeouts set at any level. The timer is started as soon as publish is called and only cancelled once rabbot is able to make the publish call on the actual exchange's channel. The timeout is cancelled once publish is called and will not result in a rejected promise due to time spent waiting on a confirmation.
+Publish timeouts can be set per message, per exchange or per connection. The most specific value overrides any set at a higher level. There are no default timeouts set at any level. The timer is started as soon as publish is called and only cancelled once foo-foo-mq is able to make the publish call on the actual exchange's channel. The timeout is cancelled once publish is called and will not result in a rejected promise due to time spent waiting on a confirmation.
 
-> Caution: rabbot does _not_ limit the growth of pending published messages. If a service cannot connect to Rabbit due to misconfiguration or the broker being down, publishing lots of messages can lead to out-of-memory errors. It is the consuming services responsibility to handle these kinds of scenarios.
+> Caution: foo-foo-mq does _not_ limit the growth of pending published messages. If a service cannot connect to Rabbit due to misconfiguration or the broker being down, publishing lots of messages can lead to out-of-memory errors. It is the consuming services responsibility to handle these kinds of scenarios.
 
 Confirm mode is not without an overhead cost. This can be turned off, per exchange, by setting `noConfirm: true`. Confirmation results in increased memory overhead on the client and broker. When off, the promise will _always_ resolve when the connection and exchange are available.
 
 #### Serializers
 
-rabbot associates serialization techniques for messages with mimeTypes which can now be set when publishing a message. Out of the box, it really only supports 3 types of serialization:
+foo-foo-mq associates serialization techniques for messages with mimeTypes which can now be set when publishing a message. Out of the box, it really only supports 3 types of serialization:
 
  * `"text/plain"`
  * `"application/json"`
@@ -18,7 +18,7 @@ rabbot associates serialization techniques for messages with mimeTypes which can
 
 You can register your own serializers using `addSerializer` but make sure to do so on both the sending and receiving side of the message.
 
-## `rabbot.publish( exchangeName, options, [connectionName] )`
+## `rabbit.publish( exchangeName, options, [connectionName] )`
 
 Things to remember when publishing a message:
 
@@ -56,9 +56,9 @@ rabbit.publish( "exchange.name",
 );
 ```
 
-## `rabbot.request( exchangeName, options, [connectionName] )`
+## `rabbit.request( exchangeName, options, [connectionName] )`
 
-This works just like a publish except that the promise returned provides the response (or responses) from the other side. A `replyTimeout` is available in the options that controls how long rabbot will wait for a reply before removing the subscription for the request to prevent memory leaks.
+This works just like a publish except that the promise returned provides the response (or responses) from the other side. A `replyTimeout` is available in the options that controls how long foo-foo-mq will wait for a reply before removing the subscription for the request to prevent memory leaks.
 
 > Note: the default replyTimeout will be double the publish timeout or 1 second if no publish timeout was ever specified.
 
@@ -125,11 +125,11 @@ rabbit.handle('request', (req) => {
 
 In scatter-gather: the recipients don't know how many of them there are and don't have to be aware that they are participating in scatter-gather/race-conditions.
 
-They just reply. The limit is applied on the requesting side by setting a `expects` property on the outgoing message to let rabbot how many messages to collect before stopping and considering the request satisfied.
+They just reply. The limit is applied on the requesting side by setting a `expects` property on the outgoing message to let foo-foo-mq how many messages to collect before stopping and considering the request satisfied.
 
 Normally this is done with mutliple responders on the other side of a topic or fanout exchange.
 
-> !IMPORTANT! - messages beyond the limit are treated as unhandled. You'll need to have an unhandled message strategy in place or at least understand how rabbot deals with them by default.
+> !IMPORTANT! - messages beyond the limit are treated as unhandled. You'll need to have an unhandled message strategy in place or at least understand how foo-foo-mq deals with them by default.
 
 ```js
 // request side
@@ -154,7 +154,7 @@ rabbit.handle('request', (req) => {
 });
 ```
 
-## `rabbot.bulkPublish( set, [connectionName] )`
+## `rabbit.bulkPublish( set, [connectionName] )`
 
 This creates a promise for a set of publishes to one or more exchanges on the same connection.
 
@@ -169,7 +169,7 @@ Each key is the name of the exchange to publish to and the value is an array of 
 The exchanges are processed serially, so this option will not work if you want finer control over sending messages to multiple exchanges in interleaved order.
 
 ```js
-rabbot.publish({
+rabbit.publish({
   'exchange-1': [
     { type: 'one', body: '1' },
     { type: 'one', body: '2' }
@@ -189,7 +189,7 @@ rabbot.publish({
 Each element in the array follows the format of `publish`'s option but requires the `exchange` property to control which exchange to publish each message to.
 
 ```js
-rabbot.publish([
+rabbit.publish([
   { type: 'one', body: '1', exchange: 'exchange-1' },
   { type: 'one', body: '2', exchange: 'exchange-1' },
   { type: 'two', body: '1', exchange: 'exchange-2' },
