@@ -1,4 +1,4 @@
-# rabbot
+# foo-foo-mq
 
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
@@ -36,7 +36,7 @@ This is a very opinionated abstraction over amqplib to help simplify the impleme
  * [Topology Setup](https://github.com/zlintz/foo-foo-mq/blob/master/docs/topology.md) - topology configuration
  * [Publishing Guide](https://github.com/zlintz/foo-foo-mq/blob/master/docs/publishing.md) - publishing and requesting
  * [Receiving Guide](https://github.com/zlintz/foo-foo-mq/blob/master/docs/receiving.md) - subscribing and handling of messages
- * [Logging](https://github.com/zlintz/foo-foo-mq/blob/master/docs/logging.md) - how rabbot logs
+ * [Logging](https://github.com/zlintz/foo-foo-mq/blob/master/docs/logging.md) - how foo-foo-mq logs
 
 ## Other Documents
 
@@ -76,7 +76,7 @@ rabbit.configure({
     name: 'default',
     user: 'guest',
     pass: 'guest',
-    host: 'my-rabbot-server',
+    host: 'my-rabbitmq-server',
     port: 5672,
     vhost: '%2f',
     replyQueue: 'customReplyQueue'
@@ -106,7 +106,7 @@ rabbit.publish('ex.1', { type: 'MyMessage', body: 'hello!' });
 
 
 setTimeout(() => {
-  rabbot.shutdown(true)
+  rabbit.shutdown(true)
 },5000);
 ```
 
@@ -118,7 +118,7 @@ setTimeout(() => {
 [travis-url]: https://travis-ci.org/zlintz/foo-foo-mq
 [coveralls-url]: https://coveralls.io/github/zlintz/foo-foo-mq?branch=master
 [coveralls-image]: https://coveralls.io/repos/github/zlintz/foo-foo-mq/badge.svg?branch=master
-[version-image]: https://img.shields.io/npm/v/rabbot.svg?style=flat
+[version-image]: https://img.shields.io/npm/v/foo-foo-mq.svg?style=flat
 [version-url]: https://www.npmjs.com/package/foo-foo-mq
 [downloads-image]: https://img.shields.io/npm/dm/foo-foo-mq.svg?style=flat
 [downloads-url]: https://www.npmjs.com/package/foo-foo-mq

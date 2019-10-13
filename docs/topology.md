@@ -2,7 +2,7 @@
 
 ## Configuration via JSON (recommended)
 
-This is the recommended approach to creating topology with rabbot. Configuration should only happen once per service. If a disconnect takes place, rabbot will attempt to re-establish the connection and all topology, including previously established subscriptions.
+This is the recommended approach to creating topology with foo-foo-mq. Configuration should only happen once per service. If a disconnect takes place, foo-foo-mq will attempt to re-establish the connection and all topology, including previously established subscriptions.
 
 > Note: setting subscribe to true will result in subscriptions starting immediately upon queue creation; be sure to have handlers created *before hand*.
 
@@ -37,14 +37,14 @@ This example shows most of the available options described above.
 
 To establish a connection with all settings in place and ready to go call configure:
 ```javascript
-  var rabbit = require( "rabbot" );
+  var rabbit = require( "foo-foo-mq" );
 
   rabbit.configure( settings ).done( function() {
     // ready to go!
   } );
 ```
 
-## `rabbot.addExchange( exchangeName, exchangeType, [options], [connectionName] )`
+## `rabbit.addExchange( exchangeName, exchangeType, [options], [connectionName] )`
 
 The call returns a promise that can be used to determine when the exchange has been created on the server.
 
@@ -64,9 +64,9 @@ Options is a hash that can contain the following:
 | **publishTimeout** | 2^32 | timeout in milliseconds for publish calls to this exchange ||
 | **replyTimeout** | 2^32 | timeout in milliseconds to wait for a reply | |
 | **limit** | 2^16 | the number of unpublished messages to cache while waiting on connection | |
-| **noConfirm** | boolean | prevents rabbot from creating the exchange in confirm mode | false |
+| **noConfirm** | boolean | prevents foo-foo-mq from creating the exchange in confirm mode | false |
 
-## `rabbot.addQueue( queueName, [options], [connectionName] )`
+## `rabbit.addQueue( queueName, [options], [connectionName] )`
 
 The call returns a promise that can be used to determine when the queue has been created on the server.
 
@@ -105,40 +105,40 @@ The unique option has 3 different possible values, each with its own behavior:
 You can specify unique queues by their friendly-name when handling and subscribing. To get the actual assigned queue name (which you should not need), you can use:
 
 ```js
-const realQueueName = rabbot.getQueue('friendly-q-name').uniqueName;
+const realQueueName = rabbit.getQueue('friendly-q-name').uniqueName;
 ```
 
 ### poison
 
-If you want to capture instances where messages have no serializer or failed to deserialize properly, you can create a dead-letter exchange and bind it to a queue where you set `poison: true` so that in the event of further errors, rabbot will continue to deliver the message without deserialization.
+If you want to capture instances where messages have no serializer or failed to deserialize properly, you can create a dead-letter exchange and bind it to a queue where you set `poison: true` so that in the event of further errors, foo-foo-mq will continue to deliver the message without deserialization.
 
  * `body` will be set to the raw Buffer
  * `quarantine` will be set to `true` as well
 
-## `rabbot.bindExchange( sourceExchange, targetExchange, [routingKeys], [connectionName] )`
+## `rabbit.bindExchange( sourceExchange, targetExchange, [routingKeys], [connectionName] )`
 
 Binds the target exchange to the source exchange. Messages flow from source to target.
 
-## `rabbot.bindQueue( sourceExchange, targetQueue, [routingKeys], [connectionName] )`
+## `rabbit.bindQueue( sourceExchange, targetQueue, [routingKeys], [connectionName] )`
 
 Binds the target queue to the source exchange. Messages flow from source to target.
 
-## `rabbot.purgeQueue( queueName, [connectionName] )`
+## `rabbit.purgeQueue( queueName, [connectionName] )`
 
-Returns a promise that will resolve to the number of purged messages. Purging is a very complicated operation and should not be used without an appreciation for nuances in how amqp delivery and rabbot's ack system works.
+Returns a promise that will resolve to the number of purged messages. Purging is a very complicated operation and should not be used without an appreciation for nuances in how amqp delivery and foo-foo-mq's ack system works.
 
-When purge is called in rabbot, first it checks to see if any messages are in the queue before it bothers moving on to try to purge. "That's a race condition!" - right, but so is purging.
+When purge is called in foo-foo-mq, first it checks to see if any messages are in the queue before it bothers moving on to try to purge. "That's a race condition!" - right, but so is purging.
 
-Purging in rabbot does _not_ remove the queue bindings for you. **If** the queue is marked as `autoDelete: true`, rabbot cannot even stop the subscription for you because doing so will cause the queue to be deleted, removing its bindings and any upstream exchanges bound to it marked with `autoDelete: true` that don't have other bindings at the moment.
+Purging in foo-foo-mq does _not_ remove the queue bindings for you. **If** the queue is marked as `autoDelete: true`, foo-foo-mq cannot even stop the subscription for you because doing so will cause the queue to be deleted, removing its bindings and any upstream exchanges bound to it marked with `autoDelete: true` that don't have other bindings at the moment.
 
-In the even that the queue isn't `autoDelete`, the subscription will be halted for the duration of the purge operation and then rabbot will attempt to re-establish subscription to the queue after.
+In the even that the queue isn't `autoDelete`, the subscription will be halted for the duration of the purge operation and then foo-foo-mq will attempt to re-establish subscription to the queue after.
 
 Anytime lots of operations are taking place against an amqp channel, there are opportunities for unexpected behaviors in terms of message arrival or even channel loss. It's important to understand the context you're in when calling `purgeQueue` and I recommend limiting its application.
 
 ## Channel Prefetch Limits
 
-rabbot mostly hides the notion of a channel behind the scenes, but still allows you to specify channel options such as the channel prefetch limit. Rather than specifying
-this on a channel object, however, it is specified as a `limit` on a queue defintion.
+foo-foo-mq mostly hides the notion of a channel behind the scenes, but still allows you to specify channel options such as the channel prefetch limit. Rather than specifying
+this on a channel object, however, it is specified as a `limit` on a queue definition.
 
 ```js
 queues: [{
