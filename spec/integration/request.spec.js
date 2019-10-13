@@ -2,6 +2,14 @@ require('../setup');
 const rabbit = require('../../src/index.js');
 const config = require('./configuration');
 
+function stallLongEnoughToARegisterUnhandleddMessages () {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 10);
+  });
+}
+
 describe('Request & Response', function () {
   var harness;
   before(function () {
@@ -163,7 +171,6 @@ describe('Request & Response', function () {
       function onReply (msg) {
         gather.push(msg);
         msg.ack();
-        done();
       }
 
       rabbit.request(
@@ -173,9 +180,16 @@ describe('Request & Response', function () {
           gather.push(msg);
           msg.ack();
         }
-      ).then(
-        onReply
-      );
+      )
+        .then(
+          onReply
+        )
+        .then(
+          stallLongEnoughToARegisterUnhandleddMessages
+        )
+        .then(() => {
+          done();
+        });
     });
 
     it('should have gathered desired replies', function () {
