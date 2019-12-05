@@ -1,4 +1,4 @@
-const Monologue = require('monologue.js');
+const Monologue = require('node-monologue');
 const connectionFn = require('./connectionFsm.js');
 const topologyFn = require('./topology.js');
 const postal = require('postal');

@@ -1,6 +1,6 @@
 // This is probably not a true monad, but it seems close based on my current understanding.
 
-const Monologue = require('monologue.js');
+const Monologue = require('node-monologue');
 const machina = require('machina');
 const log = require('../log.js')('rabbot.io');
 let staticId = 0;

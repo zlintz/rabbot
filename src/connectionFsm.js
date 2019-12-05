@@ -1,4 +1,4 @@
-const Monologue = require('monologue.js');
+const Monologue = require('node-monologue');
 const machina = require('machina');
 const format = require('util').format;
 const log = require('./log.js')('rabbot.connection');
