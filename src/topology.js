@@ -1,4 +1,4 @@
-const Monologue = require('monologue.js');
+const Monologue = require('node-monologue');
 const log = require('./log')('rabbot.topology');
 const info = require('./info');
 var Exchange, Queue;
