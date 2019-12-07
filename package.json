@@ -96,6 +96,9 @@
     "postal": "^2.0.5",
     "uuid": "^3.1.0"
   },
+  "engines": {
+    "node": "^10 || ^12"
+  },
   "semistandard": {
     "env": [
       "mocha"
