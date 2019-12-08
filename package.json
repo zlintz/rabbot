@@ -4,7 +4,7 @@
   "description": "Abstractions to simplify working with the RabbitMQ",
   "main": "src/index.js",
   "engines": {
-    "node": ">=10"
+    "node": ">=10 <=12"
   },
   "repository": "https://github.com/zlintz/foo-foo-mq",
   "scripts": {
