@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/zlintz/foo-foo-mq/compare/v3.0.0...v4.0.0) (2019-12-11)
+
+
+### Bug Fixes
+
+* **.travis.yml:** amqplib only works for {"node":">=0.8 <=12"} ([2090256](https://github.com/zlintz/foo-foo-mq/commit/2090256))
+* **noreplyqueue.spec.js:** change var to let and increase timout to match batch ack time ([3f77e4d](https://github.com/zlintz/foo-foo-mq/commit/3f77e4d))
+* **package.json:** correct engines to allow greater than eqaul to LTS versions of node ([4867af5](https://github.com/zlintz/foo-foo-mq/commit/4867af5))
+* **package.json:** dependency updates for npm audit ([33d162c](https://github.com/zlintz/foo-foo-mq/commit/33d162c))
+* **request.spec.js:** fix scatter-gather flaky test ([c1eb8f3](https://github.com/zlintz/foo-foo-mq/commit/c1eb8f3))
+* **wildcardtypes.spec.js:** fix flaky wildcard test ([63eee3d](https://github.com/zlintz/foo-foo-mq/commit/63eee3d)), closes [#4](https://github.com/zlintz/foo-foo-mq/issues/4)
+
+
+### Features
+
+* **package.json:** only support LTS node versions, >=10 ([5dd8e90](https://github.com/zlintz/foo-foo-mq/commit/5dd8e90))
+
+
+### BREAKING CHANGES
+
+* **package.json:** Node version >=10 now required
+
+
+
 <a name="2.1.0"></a>
 # [3.0.0](https://github.com/zlintz/foo-foo-mq)
 Initial take over of Rabbot with doc changes, matches 2.1.0 of rabbot 
