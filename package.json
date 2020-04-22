@@ -6,7 +6,7 @@
   "engines": {
     "node": ">=10 <=12"
   },
-  "repository": "https://github.com/zlintz/foo-foo-mq",
+  "repository": "https://github.com/Foo-Foo-MQ/foo-foo-mq",
   "scripts": {
     "lint": "semistandard",
     "lint-fix": "semistandard --fix",
