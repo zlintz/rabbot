@@ -2,7 +2,7 @@
 
 const Monologue = require('node-monologue');
 const machina = require('machina');
-const log = require('../log.js')('rabbot.io');
+const log = require('../log.js')('foo-foo-mq');
 let staticId = 0;
 
 /* state definitions
@@ -23,7 +23,7 @@ let staticId = 0;
 */
 
 /* log:
-  * `rabbot.io`
+  * `foo-foo-mq`
     * `debug`:
       * attempting acquisition
       * successful acquisition

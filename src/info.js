@@ -44,7 +44,7 @@ function getProcessInfo () {
 }
 
 function getLibInfo () {
-  return format('rabbot - %s', self.version);
+  return format('foo-foo-mq - %s', self.version);
 }
 
 module.exports = {

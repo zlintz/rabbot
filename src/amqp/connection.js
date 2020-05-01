@@ -92,6 +92,10 @@ function trim (x) {
   return x.trim(' ');
 }
 
+function readFromFileIfPathOrDefaultToInput (possiblePathOrValue) {
+  return fs.existsSync(possiblePathOrValue) ? fs.readFileSync(possiblePathOrValue) : possiblePathOrValue;
+}
+
 const Adapter = function (parameters) {
   var uriOpts = parseUri(parameters.uri);
   Object.assign(parameters, uriOpts);
@@ -122,22 +126,20 @@ const Adapter = function (parameters) {
     this.options.timeout = timeout;
   }
   if (certPath) {
-    this.options.cert = fs.existsSync(certPath) ? fs.readFileSync(certPath) : certPath;
+    this.options.cert = readFromFileIfPathOrDefaultToInput(certPath);
   }
   if (keyPath) {
-    this.options.key = fs.existsSync(keyPath) ? fs.readFileSync(keyPath) : keyPath;
+    this.options.key = readFromFileIfPathOrDefaultToInput(keyPath);
   }
   if (passphrase) {
     this.options.passphrase = passphrase;
   }
   if (pfxPath) {
-    this.options.pfx = fs.existsSync(pfxPath) ? fs.readFileSync(pfxPath) : pfxPath;
+    this.options.pfx = readFromFileIfPathOrDefaultToInput(pfxPath);
   }
   if (caPaths) {
     const list = caPaths.split(',');
-    this.options.ca = list.map((caPath) => {
-      fs.existsSync(caPath) ? fs.readFileSync(caPath) : caPath; // eslint-disable-line no-unused-expressions
-    });
+    this.options.ca = list.map(readFromFileIfPathOrDefaultToInput);
   }
   if (useSSL) {
     this.protocol = 'amqps://';
