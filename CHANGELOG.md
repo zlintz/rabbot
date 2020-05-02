@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.2"></a>
+## [4.0.2](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.0...v4.0.2) (2020-05-02)
+
+
+### Bug Fixes
+
+* **amqp/connection.js:** map call wasn't returning values for caPaths ([feb76f6](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/feb76f6))
+
+
+
 <a name="4.0.1"></a>
 ## [4.0.1](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.0...v4.0.1) (2020-05-02)
 
