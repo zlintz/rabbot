@@ -43,16 +43,16 @@ rabbit.publish( "exchange.name",
     contentType: "application/json",
     body: { text: "hello!" },
     messageId: "100",
-    expiresAfter: 1000 // TTL in ms, in this example 1 second
-    timestamp: // posix timestamp (long)
-    mandatory: true, //Must be set to true for onReturned to receive unqueued message
-    persistent: true, //If either message or exchange defines persistent=true queued messages will be saved to disk.
+    expiresAfter: 1000, // TTL in ms, in this example 1 second
+    timestamp: 1588479232215, // posix timestamp (long)
+    mandatory: true, // Must be set to true for onReturned to receive unqueued message
+    persistent: true, // If either message or exchange defines persistent=true queued messages will be saved to disk.
     headers: {
       random: "application specific value"
     },
-    timeout: // ms to wait before cancelling the publish and rejecting the promise
+    timeout: 1000 // ms to wait before cancelling the publish and rejecting the promise
   },
-  connectionName: "" // another optional way to provide connection name if needed
+  connectionName // another optional way to provide a specific connection name if needed
 );
 ```
 
