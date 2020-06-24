@@ -140,7 +140,7 @@ describe('Publish log', function () {
     });
 
     it('should return all messages', function () {
-      list.should.eql([ zero, one, two, three ]);
+      list.should.eql([zero, one, two, three]);
     });
 
     describe('when adding message to reset log', function () {

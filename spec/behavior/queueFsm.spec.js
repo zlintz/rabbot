@@ -246,7 +246,7 @@ describe('Queue FSM', function () {
         });
 
         it('should reject check', function () {
-          return queue.check().should.be.rejectedWith(`Cannot establish queue 'test' after intentionally closing its connection`);
+          return queue.check().should.be.rejectedWith('Cannot establish queue \'test\' after intentionally closing its connection');
         });
       });
     });

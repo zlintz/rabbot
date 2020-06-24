@@ -2,7 +2,7 @@ require('../setup');
 const rabbit = require('../../src/index.js');
 const config = require('./configuration');
 
-describe(`Direct Reply Queue (replyQueue: 'rabbit')`, function () {
+describe('Direct Reply Queue (replyQueue: \'rabbit\')', function () {
   var messagesToSend;
   var harness;
   var replies = [];

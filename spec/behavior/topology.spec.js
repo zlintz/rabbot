@@ -9,9 +9,9 @@ function connectionFn () {
   var handlers = {};
 
   function raise (ev) {
-    if (handlers[ ev ]) {
+    if (handlers[ev]) {
       var args = Array.prototype.slice.call(arguments, 1);
-      _.each(handlers[ ev ], function (handler) {
+      _.each(handlers[ev], function (handler) {
         if (handler) {
           handler.apply(undefined, args);
         }
@@ -20,14 +20,16 @@ function connectionFn () {
   }
 
   function on (ev, handle) {
-    if (handlers[ ev ]) {
-      handlers[ ev ].push(handle);
+    if (handlers[ev]) {
+      handlers[ev].push(handle);
     } else {
-      handlers[ ev ] = [ handle ];
+      handlers[ev] = [handle];
     }
-    return { unsubscribe: function (h) {
-      handlers[ ev ].splice(_.indexOf(handlers[ ev ], h));
-    } };
+    return {
+      unsubscribe: function (h) {
+        handlers[ev].splice(_.indexOf(handlers[ev], h));
+      }
+    };
   }
 
   function reset () {
@@ -320,7 +322,7 @@ describe('Topology', function () {
     });
 
     it('should add exchange to channels', function () {
-      should.exist(topology.channels[ 'exchange:noice' ]);
+      should.exist(topology.channels['exchange:noice']);
     });
   });
 
@@ -364,7 +366,7 @@ describe('Topology', function () {
     });
 
     it('should add exchange to channels', function () {
-      should.exist(topology.channels[ 'exchange:noice' ]);
+      should.exist(topology.channels['exchange:noice']);
     });
   });
 
@@ -400,7 +402,7 @@ describe('Topology', function () {
     });
 
     it('should not add invalid exchanges to channels', function () {
-      should.not.exist(topology.channels[ 'exchange:badtimes' ]);
+      should.not.exist(topology.channels['exchange:badtimes']);
     });
   });
 
@@ -436,7 +438,7 @@ describe('Topology', function () {
     });
 
     it('should not add invalid queues to channels', function () {
-      should.not.exist(topology.channels[ 'queue:badtimes' ]);
+      should.not.exist(topology.channels['queue:badtimes']);
     });
   });
 
@@ -485,7 +487,7 @@ describe('Topology', function () {
     });
 
     it('should add exchange to channels', function () {
-      should.not.exist(topology.channels[ 'exchange:noice' ]);
+      should.not.exist(topology.channels['exchange:noice']);
     });
   });
 
@@ -533,7 +535,7 @@ describe('Topology', function () {
     });
 
     it('should add queue to channels', function () {
-      should.not.exist(topology.channels[ 'queue:noice' ]);
+      should.not.exist(topology.channels['queue:noice']);
     });
   });
 
@@ -568,7 +570,7 @@ describe('Topology', function () {
     });
 
     it('should add binding to definitions', function () {
-      topology.definitions.bindings[ 'from->to' ].should.eql({ source: 'from', target: 'to' });
+      topology.definitions.bindings['from->to'].should.eql({ source: 'from', target: 'to' });
     });
   });
 
@@ -611,7 +613,7 @@ describe('Topology', function () {
     });
 
     it('should remove binding from definitions', function () {
-      should.not.exist(topology.definitions.bindings[ 'from->to' ]);
+      should.not.exist(topology.definitions.bindings['from->to']);
     });
   });
 
@@ -649,7 +651,7 @@ describe('Topology', function () {
     });
 
     it('should add binding to definitions', function () {
-      topology.definitions.bindings[ 'from->to' ].should.eql(
+      topology.definitions.bindings['from->to'].should.eql(
         { source: 'from', target: 'to', keys: undefined, queue: true }
       );
     });
@@ -698,7 +700,7 @@ describe('Topology', function () {
     });
 
     it('should remove binding from definitions', function () {
-      should.not.exist(topology.definitions.bindings[ 'from->to' ]);
+      should.not.exist(topology.definitions.bindings['from->to']);
     });
   });
 
@@ -731,12 +733,12 @@ describe('Topology', function () {
         .once()
         .resolves(control);
       topology = topologyFn(conn.instance, {}, {}, undefined, undefined, Exchange, Queue);
-      topology.createBinding({ source: 'from', target: 'to', keys: [ 'a.*', 'b.*' ], queue: true });
+      topology.createBinding({ source: 'from', target: 'to', keys: ['a.*', 'b.*'], queue: true });
     });
 
     it('should add binding to definitions', function () {
-      topology.definitions.bindings[ 'from->to:a.*:b.*' ].should.eql(
-        { source: 'from', target: 'to', keys: [ 'a.*', 'b.*' ], queue: true }
+      topology.definitions.bindings['from->to:a.*:b.*'].should.eql(
+        { source: 'from', target: 'to', keys: ['a.*', 'b.*'], queue: true }
       );
     });
 
@@ -777,12 +779,12 @@ describe('Topology', function () {
           .twice()
           .resolves(control);
         topology = topologyFn(conn.instance, {}, {}, undefined, undefined, Exchange, Queue);
-        topology.createBinding({ source: 'from', target: 'to', keys: [ 'a.*', 'b.*' ], queue: true })
+        topology.createBinding({ source: 'from', target: 'to', keys: ['a.*', 'b.*'], queue: true })
           .then(topology.removeBinding({ source: 'from', target: 'to' }));
       });
 
       it('should remove binding from definitions', function () {
-        should.not.exist(topology.definitions.bindings[ 'from->to' ]);
+        should.not.exist(topology.definitions.bindings['from->to']);
       });
     });
   });
@@ -817,7 +819,7 @@ describe('Topology', function () {
       });
 
       it('should keep exchange definition', function () {
-        should.exist(topology.channels[ 'exchange:delayed.ex' ]);
+        should.exist(topology.channels['exchange:delayed.ex']);
       });
     });
 
@@ -850,7 +852,7 @@ describe('Topology', function () {
       });
 
       it('should keep queue definition', function () {
-        should.exist(topology.channels[ 'queue:delayed.q' ]);
+        should.exist(topology.channels['queue:delayed.q']);
       });
     });
   });

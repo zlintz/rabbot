@@ -26,7 +26,7 @@ module.exports = {
   create: function (connection, name, confirm) {
     var method = confirm ? 'createConfirmChannel' : 'createChannel';
     var factory = function () {
-      return connection[ method ]();
+      return connection[method]();
     };
     var channel = monad({ name: name }, 'channel', factory, AmqpChannel, close.bind(null, name));
     return channel;

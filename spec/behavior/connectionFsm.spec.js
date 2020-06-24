@@ -9,13 +9,13 @@ var connectionMonadFn = function () {
   var handlers = {};
 
   function raise (ev) {
-    if (handlers[ ev ]) {
-      handlers[ ev ].apply(undefined, Array.prototype.slice.call(arguments, 1));
+    if (handlers[ev]) {
+      handlers[ev].apply(undefined, Array.prototype.slice.call(arguments, 1));
     }
   }
 
   function on (ev, handle) {
-    handlers[ ev ] = handle;
+    handlers[ev] = handle;
   }
 
   function reset () {
@@ -49,13 +49,15 @@ describe('Connection FSM', function () {
     var connection;
     it('should not throw exception', function () {
       expect(function () {
-        connection = connectionFn({ get: function (property) {
-          var value = this[ property ];
-          if (value === undefined) {
-            throw new Error('Configuration property "' + property + '" is not defined');
+        connection = connectionFn({
+          get: function (property) {
+            var value = this[property];
+            if (value === undefined) {
+              throw new Error('Configuration property "' + property + '" is not defined');
+            }
+            return value;
           }
-          return value;
-        } });
+        });
       }).to.not.throw(Error);
     });
 
@@ -143,7 +145,7 @@ describe('Connection FSM', function () {
         // causing the FSM to transition into a connected state and emit 'connected'
         // but it should NOT emit 'reconnected' despite failures since an original connection
         // was never established
-        var attempts = [ 'acquired', 'failed' ];
+        var attempts = ['acquired', 'failed'];
         monad = connectionMonadFn();
         connection = connectionFn({ name: 'success' }, function () {
           return monad;
@@ -188,7 +190,7 @@ describe('Connection FSM', function () {
         // causing the FSM to transition into a connected state and emit 'connected'
         // but it should NOT emit 'reconnected' despite failures since an original connection
         // was never established
-        var attempts = [ 'acquired', 'failed' ];
+        var attempts = ['acquired', 'failed'];
         monad = connectionMonadFn();
         connection = connectionFn({ name: 'success' }, function () {
           return monad;

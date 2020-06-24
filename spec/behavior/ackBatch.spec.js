@@ -23,25 +23,25 @@ describe('Ack Batching', function () {
     });
 
     it('should add pending status with tag', function () {
-      remap(batch.messages).should.eql([ { tag: 101, status: 'pending' } ]);
+      remap(batch.messages).should.eql([{ tag: 101, status: 'pending' }]);
     });
 
     it('ack operation should change status to ack', function () {
       messageData.ack();
       messageData.status.should.eql('ack');
-      remap(batch.messages).should.eql([ { tag: 101, status: 'ack' } ]);
+      remap(batch.messages).should.eql([{ tag: 101, status: 'ack' }]);
     });
 
     it('nack operation should change status to nack', function () {
       messageData.nack();
       messageData.status.should.eql('nack');
-      remap(batch.messages).should.eql([ { tag: 101, status: 'nack' } ]);
+      remap(batch.messages).should.eql([{ tag: 101, status: 'nack' }]);
     });
 
     it('reject operation should change status to reject', function () {
       messageData.reject();
       messageData.status.should.eql('reject');
-      remap(batch.messages).should.eql([ { tag: 101, status: 'reject' } ]);
+      remap(batch.messages).should.eql([{ tag: 101, status: 'reject' }]);
     });
 
     after(function () {
@@ -338,12 +338,12 @@ describe('Ack Batching', function () {
 
       messages.forEach(batch.addMessage.bind(batch));
 
-      messages[ 0 ].ack();
-      messages[ 1 ].ack();
-      messages[ 2 ].nack();
-      messages[ 3 ].nack();
-      messages[ 4 ].reject();
-      messages[ 5 ].reject();
+      messages[0].ack();
+      messages[1].ack();
+      messages[2].nack();
+      messages[3].nack();
+      messages[4].reject();
+      messages[5].reject();
 
       batch.listenForSignal();
       signal.publish('go', {});
@@ -352,7 +352,7 @@ describe('Ack Batching', function () {
     });
 
     it('should resolve operations in expected order with correct arguments', function () {
-      status.should.eql([ 'ack', 'nack', 'reject' ]);
+      status.should.eql(['ack', 'nack', 'reject']);
       data.should.eql([
         { tag: 102, inclusive: true },
         { tag: 104, inclusive: true },

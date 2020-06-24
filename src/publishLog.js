@@ -4,7 +4,7 @@ function add (state, m) {
   if (!state.messages.sequenceNo) {
     var mSeq = next(state);
     m.sequenceNo = mSeq;
-    state.messages[ mSeq ] = m;
+    state.messages[mSeq] = m;
   }
 }
 
@@ -42,8 +42,8 @@ function rejectWaiting (state) {
 function remove (state, m) {
   var mSeq = m.sequenceNo !== undefined ? m.sequenceNo : m;
   var removed = false;
-  if (state.messages[ mSeq ]) {
-    delete state.messages[ mSeq ];
+  if (state.messages[mSeq]) {
+    delete state.messages[mSeq];
     state.count--;
     removed = true;
   }
@@ -56,7 +56,7 @@ function remove (state, m) {
 function reset (state, err) {
   const keys = Object.keys(state.messages);
   var list = keys.map((key) => {
-    const m = state.messages[ key ];
+    const m = state.messages[key];
     delete m.sequenceNo;
     return m;
   });

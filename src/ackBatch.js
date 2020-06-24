@@ -35,31 +35,31 @@ AckBatch.prototype._ack = function (tag, inclusive) {
 
 AckBatch.prototype._ackOrNackSequence = function () {
   // try {
-  const firstMessage = this.messages[ 0 ];
+  const firstMessage = this.messages[0];
   if (firstMessage === undefined) {
     return;
   }
   const firstStatus = firstMessage.status;
   let sequenceEnd = firstMessage.tag;
-  const call = calls[ firstStatus ];
+  const call = calls[firstStatus];
   if (firstStatus === 'pending') {
   } else {
     for (let i = 1; i < this.messages.length - 1; i++) {
-      if (this.messages[ i ].status !== firstStatus) {
+      if (this.messages[i].status !== firstStatus) {
         break;
       }
-      sequenceEnd = this.messages[ i ].tag;
+      sequenceEnd = this.messages[i].tag;
     }
     if (call) {
-      this[ call ](sequenceEnd, true);
+      this[call](sequenceEnd, true);
     }
   }
 };
 
 AckBatch.prototype._firstByStatus = function (status) {
   for (var i = 0; i < this.messages.length; i++) {
-    if (this.messages[ i ].status === status) {
-      return this.messages[ i ];
+    if (this.messages[i].status === status) {
+      return this.messages[i];
     }
   }
   return undefined;
@@ -67,7 +67,7 @@ AckBatch.prototype._firstByStatus = function (status) {
 
 AckBatch.prototype._findIndex = function (status) {
   for (var i = 0; i < this.messages.length; i++) {
-    if (this.messages[ i ].status === status) {
+    if (this.messages[i].status === status) {
       return i;
     }
   }
@@ -76,8 +76,8 @@ AckBatch.prototype._findIndex = function (status) {
 
 AckBatch.prototype._lastByStatus = function (status) {
   for (var i = this.messages.length - 1; i >= 0; i--) {
-    if (this.messages[ i ].status === status) {
-      return this.messages[ i ];
+    if (this.messages[i].status === status) {
+      return this.messages[i];
     }
   }
   return undefined;
@@ -140,9 +140,9 @@ AckBatch.prototype._resolveAll = function (status, first, last) {
       this.connectionName);
     this.resolver(status, { tag: lastTag, inclusive: true })
       .then(function () {
-        this[ last ] = lastTag;
+        this[last] = lastTag;
         this._removeByStatus(status);
-        this[ first ] = undefined;
+        this[first] = undefined;
         if (count > 0 && this.messages.length === 0) {
           log.debug('No pending tags remaining on queue %s - %s', this.name, this.connectionName);
           // The following setTimeout is the only thing between an insideous heisenbug and your sanity:

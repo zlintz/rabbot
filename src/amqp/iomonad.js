@@ -209,7 +209,7 @@ module.exports = function (options, type, factory, target, close) {
         },
         operate: function (call) {
           try {
-            var result = this.item[ call.operation ].apply(this.item, call.argList);
+            var result = this.item[call.operation].apply(this.item, call.argList);
             if (result && result.then) {
               result
                 .then(call.resolve, call.reject);
@@ -347,9 +347,9 @@ module.exports = function (options, type, factory, target, close) {
 
   const names = Object.getOwnPropertyNames(target.prototype);
   names.forEach(name => {
-    const prop = target.prototype[ name ];
+    const prop = target.prototype[name];
     if (typeof prop === 'function') {
-      machine[ name ] = function () {
+      machine[name] = function () {
         var list = Array.prototype.slice.call(arguments, 0);
         return machine.operate(name, list);
       };
