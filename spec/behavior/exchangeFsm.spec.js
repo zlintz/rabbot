@@ -42,7 +42,7 @@ describe('Exchange FSM', function () {
         .returns({ then: noop });
 
       exchange = exchangeFsm(options, connection, topology, {}, ex.factory);
-      published = [ 1, 2, 3 ].map(() => exchange.publish({}).then(null, e => e.message));
+      published = [1, 2, 3].map(() => exchange.publish({}).then(null, e => e.message));
       exchange.once('failed', function (err) {
         error = err;
         done();
@@ -107,7 +107,7 @@ describe('Exchange FSM', function () {
         .returns(deferred.promise);
 
       exchange = exchangeFsm(options, connection, topology, {}, ex.factory);
-      published = [ 1, 2, 3 ].map(() =>
+      published = [1, 2, 3].map(() =>
         exchange.publish({})
           .then(null, (err) => err.message)
       );
@@ -280,7 +280,7 @@ describe('Exchange FSM', function () {
         });
 
         it('should reject publish', function () {
-          return exchange.publish({}).should.be.rejectedWith(`Cannot publish to exchange 'test' after intentionally closing its connection`);
+          return exchange.publish({}).should.be.rejectedWith('Cannot publish to exchange \'test\' after intentionally closing its connection');
         });
 
         it('should not make any calls to underlying exchange channel', function () {

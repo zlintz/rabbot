@@ -62,7 +62,7 @@ describe('AMQP Connection', function () {
     let amqplibConnectSpy;
     let sandbox;
     const getLocalPath = (fileName) => `${__dirname}/${fileName}`;
-    let sslPathSettings = [
+    const sslPathSettings = [
       getLocalPath('caPath1'),
       getLocalPath('caPath2'),
       getLocalPath('certPath'),

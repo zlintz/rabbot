@@ -77,9 +77,9 @@ global.harnessFactory = function (rabbit, cb, expected) {
 
 global.sortBy = function (list, prop) {
   list.sort((a, b) => {
-    if (a[ prop ] < b[ prop ]) {
+    if (a[prop] < b[prop]) {
       return -1;
-    } else if (a[ prop ] > b[ prop ]) {
+    } else if (a[prop] > b[prop]) {
       return 1;
     } else {
       return 0;

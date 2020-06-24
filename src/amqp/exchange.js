@@ -22,9 +22,9 @@ const DIRECT_REGEX = /^rabbit(mq)?$/i;
 function aliasOptions (options, aliases, ...omit) {
   const keys = Object.keys(options);
   return keys.reduce((result, key) => {
-    const alias = aliases[ key ] || key;
+    const alias = aliases[key] || key;
     if (omit.indexOf(key) < 0) {
-      result[ alias ] = options[ key ];
+      result[alias] = options[key];
     }
     return result;
   }, {});
@@ -65,11 +65,11 @@ function publish (channel, options, topology, log, serializers, message) {
   var channelName = options.name;
   var type = options.type;
   var baseHeaders = {
-    'CorrelationId': message.correlationId
+    CorrelationId: message.correlationId
   };
   message.headers = Object.assign(baseHeaders, message.headers);
   var contentType = getContentType(message);
-  var serializer = serializers[ contentType ];
+  var serializer = serializers[contentType];
   if (!serializer) {
     var errMessage = format("Failed to publish message with contentType '%s' - no serializer defined", contentType);
     exLog.error(errMessage);
@@ -90,7 +90,7 @@ function publish (channel, options, topology, log, serializers, message) {
     mandatory: message.mandatory || false
   };
   if (publishOptions.replyTo === DIRECT_REPLY_TO || DIRECT_REGEX.test(publishOptions.replyTo)) {
-    publishOptions.headers[ 'direct-reply-to' ] = 'true';
+    publishOptions.headers['direct-reply-to'] = 'true';
   }
   if (!options.noConfirm && !message.sequenceNo) {
     log.add(message);

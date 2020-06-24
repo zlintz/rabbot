@@ -76,7 +76,7 @@ describe('Wild Card Type Handling', function () {
 
   it("should not handle message types that don't match the pattern", function () {
     harness.unhandled.length.should.equal(1);
-    harness.unhandled[ 0 ].body.should.eql('four');
+    harness.unhandled[0].body.should.eql('four');
   });
 
   after(function () {

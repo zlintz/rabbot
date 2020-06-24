@@ -23,9 +23,9 @@ describe('Configuration', function () {
 
   describe('with valid configuration', function () {
     var config = {
-      exchanges: [ {} ],
-      queues: [ {} ],
-      bindings: [ {} ]
+      exchanges: [{}],
+      queues: [{}],
+      bindings: [{}]
     };
     var connectionMock;
     before(function () {
@@ -60,9 +60,9 @@ describe('Configuration', function () {
 
   describe('with an initially failed connection', function () {
     var config = {
-      exchanges: [ {} ],
-      queues: [ {} ],
-      bindings: [ {} ]
+      exchanges: [{}],
+      queues: [{}],
+      bindings: [{}]
     };
     var connectionMock;
     before(function () {
@@ -97,9 +97,9 @@ describe('Configuration', function () {
 
   describe('when exchange creation fails', function () {
     var config = {
-      exchanges: [ {} ],
-      queues: [ {} ],
-      bindings: [ {} ]
+      exchanges: [{}],
+      queues: [{}],
+      bindings: [{}]
     };
     var connectionMock;
     var error;
@@ -138,9 +138,9 @@ describe('Configuration', function () {
 
   describe('when queue creation fails', function () {
     var config = {
-      exchanges: [ {} ],
-      queues: [ {} ],
-      bindings: [ {} ]
+      exchanges: [{}],
+      queues: [{}],
+      bindings: [{}]
     };
     var connectionMock;
     var error;
@@ -181,9 +181,9 @@ describe('Configuration', function () {
 
   describe('when binding creation fails', function () {
     var config = {
-      exchanges: [ {} ],
-      queues: [ {} ],
-      bindings: [ {} ]
+      exchanges: [{}],
+      queues: [{}],
+      bindings: [{}]
     };
     var connectionMock;
     var error;

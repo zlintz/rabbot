@@ -30,7 +30,7 @@ describe('Random Queue Name', function () {
           queueName = queue.name;
           rabbit.publish('', { type: 'rando', routingKey: queueName, body: 'one' });
           rabbit.publish('', { type: 'rando', routingKey: queueName, body: Buffer.from('two') });
-          rabbit.publish('', { type: 'rando', routingKey: queueName, body: [ 0x62, 0x75, 0x66, 0x66, 0x65, 0x72 ] });
+          rabbit.publish('', { type: 'rando', routingKey: queueName, body: [0x62, 0x75, 0x66, 0x66, 0x65, 0x72] });
         });
     });
     harness = harnessFactory(rabbit, done, 3);

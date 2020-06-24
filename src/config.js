@@ -10,8 +10,8 @@ module.exports = function (Broker) {
   Broker.prototype.configure = function (config) {
     const emit = this.emit.bind(this);
     const configName = config.name || 'default';
-    this.configurations[ configName ] = config;
-    this.configuring[ configName ] = new Promise(function (resolve, reject) {
+    this.configurations[configName] = config;
+    this.configuring[configName] = new Promise(function (resolve, reject) {
       function onExchangeError (connection, err) {
         log.error('Configuration of %s failed due to an error in one or more exchange settings: %s', connection.name, err);
         reject(err);
@@ -65,6 +65,6 @@ module.exports = function (Broker) {
           reject
         );
     }.bind(this));
-    return this.configuring[ configName ];
+    return this.configuring[configName];
   };
 };
