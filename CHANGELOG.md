@@ -1,6 +1,14 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [4.0.3](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.2...v4.0.3) (2020-06-26)
+
+
+### Bug Fixes
+
+* **package.json:** devDependency updates and publishing.md update ([9fed4be](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/9fed4be95b2289322d46f037a18d142e9da91b68))
+* **package.json:** update uuid package ([64a771b](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/64a771b3ffbba3a3d07fa85ec6fc56f1061a7aea))
 
 <a name="4.0.2"></a>
 ## [4.0.2](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.0...v4.0.2) (2020-05-02)
