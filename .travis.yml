@@ -10,7 +10,7 @@ node_js:
   - "12"
 
 before_script:
-  - npm run bootstrap-container
+  - npm run run-container
   - sleep 10
 
 script:
