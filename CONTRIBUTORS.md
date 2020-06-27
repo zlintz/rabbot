@@ -1,6 +1,6 @@
 ## Contributors
 
-These folks have all made significant contributions to the original [rabbot](https://github.com/arobson/rabbot) implementation this project is based on:
+These folks have all made significant contributions to the original [rabbot](https://github.com/arobson/rabbot) implementation on which this project is based:
 
  * [Alex Robson](http://github.com/arobson)
  * [Derick Bailey](http://derickbailey.com/)
