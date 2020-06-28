@@ -1,6 +1,7 @@
 ## Special Thanks To
 
-Several folks have contributed time, effort, ideas or small PRs to this project. It would not be what it is without them!
+Several folks have contributed time, effort, ideas or small PRs to the legacy of this project.
+It would not be what it is without them!
 
  * [Ryan Niemeyer](http://knockmeout.net)
  * [Nathan Graves](https://github.com/woolite64)
