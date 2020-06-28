@@ -19,6 +19,12 @@ Several folks have contributed time, effort, ideas or small PRs to this project.
  * [Hugo Cortes](https://github.com/hugocortes)
  * [Mathias Lundell](https://github.com/luddd3)
 
+### Rabbot
+
+We cannot thank Alex Robson enough for the time and effort he put into Rabbot, the predecessor of foo-foo-mq.
+Without him, this library would not be what it is today.
+We hope that with time we can build on his legacy as successfully as he was able to build on the successes of his predecessors.
+
 ### In Memoriam
 
 Austin Young was an exceptionally bright software engineer that made material contributions to Wascally (the predecessor) which remain a big part of Rabbot today. Austin took on the challenging and somewhat tedious task of building the first pass at batch acknowledgements and the approach to testing them.
