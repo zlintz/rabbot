@@ -11,14 +11,20 @@ Covering message handling and subscriptions.
 > * Specifying `queueName` will cause the handler to handle messages for that queue _only_
 > * `typeName` can use AMQP style wild-cards to handle multiple message types - use this with caution!
 
-Message handlers are registered to handle a message based on the typeName. Calling handle will return a reference to the handler that can later be removed. The message that is passed to the handler is the raw Rabbit payload. The body property contains the message body published. The message has `ack`, `nack` (requeue the message), `reply` and `reject` (don't requeue the message) methods control what Rabbit does with the message.
+Message handlers are registered to handle a message based on the typeName.
+Calling handle will return a reference to the handler that can later be removed.
+The message that is passed to the handler is the raw Rabbit payload.
+The body property contains the message body published.
+The message has `ack`, `nack` (requeue the message), `reply` and `reject` (don't requeue the message) methods that control what Rabbit does with the message.
 
-> !IMPORTANT!: ack, nack and reject are effectively noOps when a queue's `noAck` is set to `true`. RabbitMQ does not support nacking or rejection of messages from consumers in `no-ack` mode. This means that error handling and unhandled message strategies won't be able to re-queue messages.
+> !IMPORTANT!: ack, nack and reject are effectively no-ops when a queue's `noAck` is set to `true`.
+> RabbitMQ does not support nacking or rejection of messages from consumers in `no-ack` mode.
+> This means that error handling and unhandled message strategies won't be able to re-queue messages.
 
 ### Options
 If using the first form, the options hash can contain the following properties, defaults shown:
 
-```js
+```javascript
 {
   queue: "*", // only handle messages from the queue with this name
   type: "#", // handle messages with this type name or pattern
@@ -44,7 +50,7 @@ var handler = rabbit.handle( "company.project.messages.logEntry", function( mess
   } catch( err ) {
     message.nack();
   }
-} );
+});
 
 handler.remove();
 ```
@@ -116,14 +122,17 @@ rabbit.nackUnhandled();
 
 ### `rabbit.rejectUnhandled()`
 
-Rejects unhandled messages so that will will _not_ be requeued. **DO NOT** use this unless there are dead letter exchanges for all queues.
+Rejects unhandled messages so that they will _not_ be requeued.
+**DO NOT** use this unless there are dead letter exchanges for all queues.
+
 ```javascript
 rabbit.rejectUnhandled();
 ```
 
 ## Returned Messages
 
-Unroutable messages that were published with `mandatory: true` will be returned. These messages cannot be ack/nack'ed.
+Unroutable messages that were published with `mandatory: true` will be returned.
+These messages cannot be ack/nack'ed.
 
 ### `rabbit.onReturned( handler )`
 
@@ -182,22 +191,31 @@ The following structure shows and briefly explains the format of the message tha
 > * If the queue is auto-delete, this will destroy the queue, dropping messages and losing any messages sent that would have been routed to it.
 > * If a network disruption has occurred or does occur, subscription will be restored to its last known state.
 
-Stops consuming messages from the queue. Does not explicitly change bindings on the queue. Does not explicitly release the queue or the channel used to establish the queue. In general, Foo-foo-mq works best when queues exist for the lifetime of a service. Starting and stopping queue subscriptions is likely to produce unexpected behaviors (read: avoid it).
+Stops consuming messages from the queue.
+Does not explicitly change bindings on the queue.
+Does not explicitly release the queue or the channel used to establish the queue.
+In general, foo-foo-mq works best when queues exist for the lifetime of a service.
+Starting and stopping queue subscriptions is likely to produce unexpected behaviors (read: avoid it).
 
 ## Message API
-foo-foo-mq defaults to (and assumes) queues are in ack mode. It batches ack and nack operations in order to improve total throughput. Ack/Nack calls do not take effect immediately.
+foo-foo-mq defaults to (and assumes) queues are in ack mode.
+It batches ack and nack operations in order to improve total throughput.
+Ack/Nack calls do not take effect immediately.
 
 ### `message.ack()`
 Enqueues the message for acknowledgement.
 
 ### `message.nack()`
-Enqueues the message for rejection. This will re-enqueue the message.
+Enqueues the message for rejection.
+This will re-enqueue the message.
 
 ### `message.reject()`
-Rejects the message without re-queueing it. Please use with caution and consider having a dead-letter-exchange assigned to the queue before using this feature.
+Rejects the message without re-queueing it.
+Please use with caution and consider having a dead-letter-exchange assigned to the queue before using this feature.
 
 ### `message.reply( message, [options] )`
-Acknowledges the messages and sends the message back to the requestor. The `message` is only the body of the reply.
+Acknowledges the messages and sends the message back to the requestor.
+The `message` is only the body of the reply.
 
 The options hash can specify additional information about the reply and has the following properties (defaults shown:
 
@@ -211,10 +229,14 @@ The options hash can specify additional information about the reply and has the 
 ```
 
 ### Queues in `noBatch` mode
-foo-foo-mq now supports the ability to put queues into non-batching behavior. This causes ack, nack and reject calls to take place against the channel immediately. This feature is ideal when processing messages are long-running and consumer limits are in place. Be aware that this feature does have a significant impact on message throughput.
+foo-foo-mq now supports the ability to put queues into non-batching behavior.
+This causes ack, nack and reject calls to take place against the channel immediately.
+This feature is ideal when processing messages are long-running and consumer limits are in place.
+Be aware that this feature does have a significant impact on message throughput.
 
 ## Reply Queues
-By default, foo-foo-mq creates a unique reply queue for each connection which is automatically subscribed to and deleted on connection close. This can be modified or turned off altogether.
+By default, foo-foo-mq creates a unique reply queue for each connection which is automatically subscribed to and deleted on connection close.
+This can be modified or turned off altogether.
 
 Changing the behavior is done by passing one of three values to the `replyQueue` property on the connection hash:
 
@@ -258,7 +280,9 @@ rabbit.addConnection( {
 
 ## Custom Serializers
 
-Serializers are objects with a `serialize` and `deserialize` method and get assigned to a specific content type. When a message is published or received with a specific `content-type`, foo-foo-mq will attempt to look up a serializer that matches. If one isn't found, an error will get thrown.
+Serializers are objects with a `serialize` and `deserialize` method and get assigned to a specific content type.
+When a message is published or received with a specific `content-type`, foo-foo-mq will attempt to look up a serializer that matches.
+If one isn't found, an error will get thrown.
 
 > Note: you can over-write foo-foo-mq's default serializers but probably shouldn't unless you know what you're doing.
 
@@ -268,7 +292,9 @@ The serialize function takes the message content and must return a Buffer object
 
 ### `rabbit.deserialize( bytes, encoding )`
 
-The deserialize function takes both the raw bytes and the encoding sent. While "utf8" is the only supported encoding foo-foo-mq produces, the encoding is passed in case the message was produced by another library using a different encoding.
+The deserialize function takes both the raw bytes and the encoding sent.
+While "utf8" is the only supported encoding foo-foo-mq produces,
+the encoding is passed in case the message was produced by another library using a different encoding.
 
 ### `rabbit.addSerializer( contentType, serializer )`
 
@@ -287,7 +313,8 @@ rabbit.addSerializer( "application/yaml", {
 
 ## Failed Serialization
 
-Failed serialization is rejected without requeueing. If you want to catch this, you must:
+Failed serialization is rejected without requeueing.
+If you want to catch this, you must:
 
  * assign a deadletter exchange (DLX) to your queues
  * bind the deadletter queue (DLQ) to the DLX
@@ -298,8 +325,10 @@ Failed serialization is rejected without requeueing. If you want to catch this, 
    * `original.topic.quarantined` - one topic's quarantined messages
    * `#.quarantined` - all quarantined messages
 
-If your handler is getting both regular and quarantined messages, be sure to check the `quarantined` flag on the message to avoid trying to handle it like a usual message (since it will not be deserialized).
+If your handler is getting both regular and quarantined messages,
+be sure to check the `quarantined` flag on the message to avoid trying to handle it like a usual message (since it will not be deserialized).
 
 ### Rationale
 
-Without this approach, nacking a message body that cannot be processed causes the message to be continuously requeued and reprocessed indefinitely and can cause a queue to fill with garbage.
+Without this approach, nacking a message body that cannot be processed
+causes the message to be continuously requeued and reprocessed indefinitely and can cause a queue to fill with garbage.

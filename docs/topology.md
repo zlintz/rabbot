@@ -2,7 +2,9 @@
 
 ## Configuration via JSON (recommended)
 
-This is the recommended approach to creating topology with foo-foo-mq. Configuration should only happen once per service. If a disconnect takes place, foo-foo-mq will attempt to re-establish the connection and all topology, including previously established subscriptions.
+This is the recommended approach to creating topology with foo-foo-mq.
+Configuration should only happen once per service.
+If a disconnect takes place, foo-foo-mq will attempt to re-establish the connection and all topology, including previously established subscriptions.
 
 > Note: setting subscribe to true will result in subscriptions starting immediately upon queue creation; be sure to have handlers created *before hand*.
 
@@ -96,13 +98,18 @@ Options is a hash that can contain the following:
 
 The unique option has 3 different possible values, each with its own behavior:
 
- * `hash` - results in a unique positive integer per process. Use when queue recovery is not a concern.
- * `consistent` - results in a unique positive integer based on machine name and process title. Use when queue recovery is required.
- * `id` - creates a consumer tag consisting of the machine name, process title and process id. Use when readability is desired and queue recovery is not a concern.
+ * `hash` - results in a unique positive integer per process.
+   Use when queue recovery is not a concern.
+ * `consistent` - results in a unique positive integer based on machine name and process title.
+   Use when queue recovery is required.
+ * `id` - creates a consumer tag consisting of the machine name, process title and process id.
+   Use when readability is desired and queue recovery is not a concern.
 
-> Note: the concept of queue recovery is that the same queue name will be generated in the event of a process restart. If using `hash` or `id`, the pid is used and a different queue name will be generated each time the process starts.
+> Note: the concept of queue recovery is that the same queue name will be generated in the event of a process restart.
+> If using `hash` or `id`, the pid is used and a different queue name will be generated each time the process starts.
 
-You can specify unique queues by their friendly-name when handling and subscribing. To get the actual assigned queue name (which you should not need), you can use:
+You can specify unique queues by their friendly-name when handling and subscribing.
+To get the actual assigned queue name (which you should not need), you can use:
 
 ```js
 const realQueueName = rabbit.getQueue('friendly-q-name').uniqueName;
@@ -110,7 +117,9 @@ const realQueueName = rabbit.getQueue('friendly-q-name').uniqueName;
 
 ### poison
 
-If you want to capture instances where messages have no serializer or failed to deserialize properly, you can create a dead-letter exchange and bind it to a queue where you set `poison: true` so that in the event of further errors, foo-foo-mq will continue to deliver the message without deserialization.
+If you want to capture instances where messages have no serializer or failed to deserialize properly,
+you can create a dead-letter exchange and bind it to a queue where you set `poison: true`
+so that in the event of further errors, foo-foo-mq will continue to deliver the message without deserialization.
 
  * `body` will be set to the raw Buffer
  * `quarantine` will be set to `true` as well
@@ -125,22 +134,32 @@ Binds the target queue to the source exchange. Messages flow from source to targ
 
 ## `rabbit.purgeQueue( queueName, [connectionName] )`
 
-Returns a promise that will resolve to the number of purged messages. Purging is a very complicated operation and should not be used without an appreciation for nuances in how amqp delivery and foo-foo-mq's ack system works.
+Returns a promise that will resolve to the number of purged messages.
+Purging is a very complicated operation and should not be used without an appreciation for nuances in how amqp delivery and foo-foo-mq's ack system works.
 
-When purge is called in foo-foo-mq, first it checks to see if any messages are in the queue before it bothers moving on to try to purge. "That's a race condition!" - right, but so is purging.
+When purge is called in foo-foo-mq,
+first it checks to see if any messages are in the queue before it bothers moving on to try to purge.
+"That's a race condition!" - right, but so is purging.
 
-Purging in foo-foo-mq does _not_ remove the queue bindings for you. **If** the queue is marked as `autoDelete: true`, foo-foo-mq cannot even stop the subscription for you because doing so will cause the queue to be deleted, removing its bindings and any upstream exchanges bound to it marked with `autoDelete: true` that don't have other bindings at the moment.
+Purging in foo-foo-mq does _not_ remove the queue bindings for you.
+**If** the queue is marked as `autoDelete: true`, foo-foo-mq cannot even stop the subscription for you
+because doing so will cause the queue to be deleted,
+removing its bindings and any upstream exchanges bound to it marked with `autoDelete: true` that don't have other bindings at the moment.
 
-In the even that the queue isn't `autoDelete`, the subscription will be halted for the duration of the purge operation and then foo-foo-mq will attempt to re-establish subscription to the queue after.
+In the even the queue isn't `autoDelete`, the subscription will be halted for the duration of the purge operation
+and then foo-foo-mq will attempt to re-establish subscription to the queue after.
 
-Anytime lots of operations are taking place against an amqp channel, there are opportunities for unexpected behaviors in terms of message arrival or even channel loss. It's important to understand the context you're in when calling `purgeQueue` and I recommend limiting its application.
+Anytime lots of operations are taking place against an amqp channel,
+there are opportunities for unexpected behaviors in terms of message arrival or even channel loss.
+It's important to understand the context you're in when calling `purgeQueue` and I recommend limiting its application.
 
 ## Channel Prefetch Limits
 
-foo-foo-mq mostly hides the notion of a channel behind the scenes, but still allows you to specify channel options such as the channel prefetch limit. Rather than specifying
-this on a channel object, however, it is specified as a `limit` on a queue definition.
+foo-foo-mq mostly hides the notion of a channel behind the scenes,
+but still allows you to specify channel options such as the channel prefetch limit.
+Rather than specifying this on a channel object; however, it is specified as a `limit` on a queue definition.
 
-```js
+```javascript
 queues: [{
   // ...
 
@@ -158,6 +177,7 @@ rabbit.addQueue( "some.q", {
 
 This queue configuration will set a prefetch limit of 5 on the channel that is used for consuming this queue.
 
-**Note:** The queue `limit` is not the same as the `queueLimit` option - the latter of which sets the maximum number of messages allowed in the queue.
+**Note:** The queue `limit` is not the same as the `queueLimit` option,
+the latter of which sets the maximum number of messages allowed in the queue.
 
 

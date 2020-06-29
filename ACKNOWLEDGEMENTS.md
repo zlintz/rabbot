@@ -1,6 +1,7 @@
 ## Special Thanks To
 
-Several folks have contributed time, effort, ideas or small PRs to this project. It would not be what it is without them!
+Several folks have contributed time, effort, ideas or small PRs to the legacy of this project.
+It would not be what it is without them!
 
  * [Ryan Niemeyer](http://knockmeout.net)
  * [Nathan Graves](https://github.com/woolite64)
@@ -18,6 +19,12 @@ Several folks have contributed time, effort, ideas or small PRs to this project.
  * [Dj Walker-Morgan](http://www.codepope.com)
  * [Hugo Cortes](https://github.com/hugocortes)
  * [Mathias Lundell](https://github.com/luddd3)
+
+### Rabbot
+
+We cannot thank Alex Robson enough for the time and effort he put into Rabbot, the predecessor of foo-foo-mq.
+Without him, this library would not be what it is today.
+We hope that with time we can build on his legacy as successfully as he was able to build on the successes of his predecessors.
 
 ### In Memoriam
 

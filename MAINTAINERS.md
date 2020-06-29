@@ -1,3 +1,9 @@
 ## Maintainers List
 
-It's very lonely in here. I need to add another. If you're interested in helping maintain Rabbot, shoot me an email.
+| Github Username | Name            | Contact Info              |
+| :-------        | :-------------- | :------------------------ |
+| zlintz          | Zach Lintz      | lintz.zach@gmail.com      |
+| auroq           | Parker Johansen | johansen.parker@gmail.com |
+
+
+If you're interested in helping maintain Foo-Foo-MQ, contact us!

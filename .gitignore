@@ -1,15 +1,29 @@
-.idea/
-.DS_Store
-.nyc_output/
-.vagrant/
-coverage/
-log/
-node_modules/
-plato/
+# Project Specific
 tmp/
+plato/
+package-lock.json
+
+# Logs
+log/
+debug.log
 *npm-debug.log
+
+# Generated Output
+dist/
+coverage/
+.nyc_output/
+node_modules/
+
+# Editors
 *.swp
 *.swo
+.idea/
+.vscode/
+
+# System Files
+Thumbs.db
+.DS_Store
+
+# Vagrant
+.vagrant/
 /Vagrantfile
-package-lock.json
-debug.log
