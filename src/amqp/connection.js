@@ -59,13 +59,12 @@ function max (x, y) {
 
 function parseUri (uri) {
   if (uri) {
-    var parsed = new url.URL(uri);
-    var authSplit = parsed.auth ? parsed.auth.split(':') : [null, null];
-    var heartbeat = parsed.query ? parsed.query.split('&')[0].split('=')[1] : null;
+    const parsed = new url.URL(uri);
+    const heartbeat = parsed.searchParams.get('heartbeat');
     return {
       useSSL: parsed.protocol === 'amqps:',
-      user: authSplit[0],
-      pass: authSplit[1],
+      user: parsed.username,
+      pass: parsed.password,
       host: parsed.hostname,
       port: parsed.port,
       vhost: parsed.pathname ? parsed.pathname.slice(1) : undefined,

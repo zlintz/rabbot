@@ -33,6 +33,28 @@ describe('Bad Connection', function () {
     after(() => rabbit.close('silly', true));
   });
 
+  describe('when attempting a uri connection with an invalid password', function () {
+    var error;
+    before((done) => {
+      rabbit.once('#.connection.failed', (err) => {
+        error = err;
+        done();
+      });
+
+      rabbit.addConnection({
+        name: 'noauthz',
+        uri: 'amqp://guest:notguest@localhost:5672/%2f?heartbeat=10'
+      })
+        .catch(noop);
+    });
+
+    it('should fail to connect', () => {
+      error.should.equal('No endpoints could be reached');
+    });
+
+    after(() => rabbit.close('noauthz', true));
+  });
+
   describe('when configuring against a bad connection', function () {
     var config;
     before(() => {
