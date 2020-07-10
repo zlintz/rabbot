@@ -6,4 +6,10 @@ spec/
 plato/
 coverage/
 .vagrant/
-.idea
+.idea/
+.nyc_output/
+.editorconfig
+.travis.yml
+.nvmrc
+Dockerfile
+

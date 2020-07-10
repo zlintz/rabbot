@@ -4,7 +4,7 @@ const config = require('./configuration');
 
 describe('Connection', function () {
   describe('on connection', function () {
-    var connected;
+    let connected;
     before(function (done) {
       rabbit.once('connected', (c) => {
         connected = c;
@@ -19,6 +19,25 @@ describe('Connection', function () {
 
     after(function () {
       return rabbit.close('default');
+    });
+  });
+
+  describe('on connection using uri', function () {
+    let connected;
+    before(function (done) {
+      rabbit.once('connected', (c) => {
+        connected = c;
+        done();
+      });
+      rabbit.addConnection({ name: 'connectionWithUri', uri: 'amqp://guest:guest@127.0.0.1:5672/%2f?heartbeat=11' });
+    });
+
+    it('should assign uri to connection', function () {
+      connected.uri.should.equal('amqp://guest:guest@127.0.0.1:5672/%2f?heartbeat=11');
+    });
+
+    after(function () {
+      return rabbit.close('connectionWithUri');
     });
   });
 });
