@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [4.0.3](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.2...v4.0.3) (2020-06-26)
 
+### Warning
+
+This version `4.0.3` had an unintentional bug as a result of moving away from the deprecated url.parse to the URL class.
+As a result, only consumers that were passing in a `uri` with credentials for connection containing were being ignored, and were defaulting back to `guest:guest` for `username:password`.  
+
+Consumers providing separate keys for `user` and `pass` were not affected by this. This is fixed in `v4.0.4`
 
 ### Bug Fixes
 
