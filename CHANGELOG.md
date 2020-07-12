@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.4](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.3...v4.0.4) (2020-07-12)
+
+
+### Bug Fixes
+
+* **connection.js:** correct accessor for username and password ([f67da30](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/f67da30847c1958424f330ee2dc87c1afcbf1212)), closes [#14](https://github.com/Foo-Foo-MQ/foo-foo-mq/issues/14)
+
 ### [4.0.3](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.2...v4.0.3) (2020-06-26)
 
 ### Warning
