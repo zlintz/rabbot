@@ -9,7 +9,6 @@ node_js:
   - "10"
   - "12"
   - "14"
-  - "node"
 
 before_script:
   - npm run run-container
