@@ -87,7 +87,7 @@
     "standard-version": "^8.0.0"
   },
   "dependencies": {
-    "amqplib": "~0.5.2",
+    "amqplib": "~0.6.0",
     "bole": "^4.0.0",
     "debug": "^4.1.1",
     "machina": "^4.0.2",
