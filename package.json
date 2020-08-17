@@ -1,6 +1,6 @@
 {
   "name": "foo-foo-mq",
-  "version": "4.0.4",
+  "version": "5.0.0",
   "description": "Abstractions to simplify working with the RabbitMQ",
   "main": "src/index.js",
   "engines": {

@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.4...v5.0.0) (2020-08-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* **package.json:** node 8 is not lts, no longer supported
+
+### Bug Fixes
+
+* **package.json:** add node and 14 to ci steps, update engines to support node 14 ([a7f7c05](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/a7f7c055d5d970d5c66cb1a3966c42f991a2fe1b))
+* **package.json:** update node-monolouge to 1.0.0 ([0d178e6](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/0d178e6efebb33e7304a7ea39dc864dfd3fbffc2))
+* **package.json:** update to amqplib 0.6.0 ([19d253c](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/19d253c02eb5290ca1cac236c12bfaa66550cc58))
+
 ### [4.0.4](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.3...v4.0.4) (2020-07-12)
 
 
