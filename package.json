@@ -24,11 +24,19 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "author": "Zach Lintz",
+  "author": {
+    "name": "Foo-Foo-MQ Team",
+    "email": "dev@foofoomq.com"
+  },
   "contributors": [
     {
+      "name": "Zach Lintz",
+      "email": "zlintz@foofoomq.com",
+      "url": "https://github.com/zlintz"
+    },
+    {
       "name": "Parker Johansen",
-      "email": "johansen.parker@gmail.com",
+      "email": "auroq@foofoomq.com",
       "url": "https://github.com/auroq"
     },
     {
