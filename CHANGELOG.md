@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v5.0.0...v5.1.0) (2021-03-14)
+
+
+### Features
+
+* **package.json and travis:** update amqplib and add support for node 15 ([0fe6a5c](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/0fe6a5cb413712b95fef6add7ce6af0c0f6b1c04))
+
+
+### Bug Fixes
+
+* **package.json:** update node-monologue to version that supports node 15 ([eb6210d](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/eb6210d090ae235518d61ae3250c4d27cfbe9a72))
+
 ## [5.0.0](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v4.0.4...v5.0.0) (2020-08-17)
 
 
