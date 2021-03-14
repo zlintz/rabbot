@@ -99,7 +99,7 @@
     "bole": "^4.0.0",
     "debug": "^4.1.1",
     "machina": "^4.0.2",
-    "node-monologue": "^1.0.0",
+    "node-monologue": "^1.0.1",
     "postal": "^2.0.5",
     "uuid": "^8.2.0"
   },
