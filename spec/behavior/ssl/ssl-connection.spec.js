@@ -20,7 +20,8 @@ describe('AMQP Connection', function () {
           certPath: 'cert',
           keyPath: 'key',
           pfxPath: 'pfx',
-          passphrase: 'passphrase-is-not-a-path'
+          passphrase: 'passphrase-is-not-a-path',
+          port: null // To check the port is auto-resolved correctly to 5671
         }
       })
         .catch(() => {
@@ -33,7 +34,7 @@ describe('AMQP Connection', function () {
     });
 
     it('should have all of the provided ssl options', function () {
-      const uri = 'amqps://guest:guest@127.0.0.1:5672/%2f?heartbeat=30';
+      const uri = 'amqps://guest:guest@127.0.0.1:5671/%2f?heartbeat=30';
 
       const expectedConnectionOptions = {
         servername: '127.0.0.1',
