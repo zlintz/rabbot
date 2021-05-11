@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v5.1.0...v6.0.0) (2021-05-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* default port on amqps:// uri is now 5671
+
+### Bug Fixes
+
+* default port resolving on amqps:// protocol should be 5671 ([84440d4](https://github.com/Foo-Foo-MQ/foo-foo-mq/commit/84440d48eef0974577a8c6a995b90411ded7c1fc))
+
 ## [5.1.0](https://github.com/Foo-Foo-MQ/foo-foo-mq/compare/v5.0.0...v5.1.0) (2021-03-14)
 
 
